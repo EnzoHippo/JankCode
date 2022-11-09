@@ -3,19 +3,21 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
 import static edu.wpi.first.wpilibj.PS4Controller.Button;
-
-import edu.wpi.first.math.controller.PIDController;
+//import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
-import frc.robot.Constants.DriveConstants;
+//import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.TurnToAngle;
-import frc.robot.commands.TurnToAngleProfiled;
+// import frc.robot.commands.TurnToAngle;
+// import frc.robot.commands.TurnToAngleProfiled;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.BeltSubsytem;
+import frc.robot.subsystems.IntakeSubsytem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
+//import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -28,9 +30,20 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final IntakeSubsytem m_intake = new IntakeSubsytem();
+  private final BeltSubsytem m_belt = new BeltSubsytem();
   // The driver's controller
-  PS4Controller m_driverController = new PS4Controller(OIConstants.kDriverControllerPort);
+  Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
+  JoystickButton button1 = new JoystickButton(m_driverController, 1);
+  JoystickButton button2 = new JoystickButton(m_driverController, 2);
+  JoystickButton button3 = new JoystickButton(m_driverController, 3);
+  JoystickButton button4 = new JoystickButton(m_driverController, 4);
+  JoystickButton button5 = new JoystickButton(m_driverController, 5);
+  JoystickButton button6 = new JoystickButton(m_driverController, 6);
+  JoystickButton button7 = new JoystickButton(m_driverController, 7);
+  JoystickButton button8 = new JoystickButton(m_driverController, 8);
+  //FlightStick stick = new FlightStick(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -44,9 +57,12 @@ public class RobotContainer {
         // hand, and turning controlled by the right.
         new RunCommand(
             () ->
-                m_robotDrive.arcadeDrive(
-                    -m_driverController.getLeftY(), m_driverController.getRightX()),
+            
+            m_robotDrive.arcadeDrive(
+                    -m_driverController.getRawAxis(1), m_driverController.getRawAxis(0)),
             m_robotDrive));
+            
+
   }
 
   /**
@@ -60,9 +76,20 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kR1.value)
         .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
         .whenReleased(() -> m_robotDrive.setMaxOutput(1));
-
+    new JoystickButton(m_driverController, Button.kR1.value)
+        .whileHeld(() -> m_shooter.shoot((m_driverController.getRawAxis(3))))
+        .whenReleased(() -> m_shooter.shoot(0));;
+    new JoystickButton(m_driverController, 2)
+        .whileHeld(() -> m_intake.intake(-.7))
+        .whenReleased(() -> m_intake.intake(0));
+    new JoystickButton(m_driverController, 3)
+        .whileHeld(() -> m_belt.belt((m_driverController.getRawAxis(3))))
+        .whenReleased(() -> m_belt.belt(0));
+    new JoystickButton(m_driverController, 4)
+        .whileHeld(() -> m_belt.belt(-.4))
+        .whenReleased(() -> m_belt.belt(0));
     // Stabilize robot to drive straight with gyro when left bumper is held
-    new JoystickButton(m_driverController, Button.kL1.value)
+    /*new JoystickButton(m_driverController, Button.kL1.value)
         .whenHeld(
             new PIDCommand(
                 new PIDController(
@@ -74,17 +101,17 @@ public class RobotContainer {
                 // Setpoint is 0
                 0,
                 // Pipe the output to the turning controls
-                output -> m_robotDrive.arcadeDrive(-m_driverController.getLeftY(), output),
+                output -> m_robotDrive.arcadeDrive(-m_driverController.getRawAxis(0), output),
                 // Require the robot drive
                 m_robotDrive));
-
+                //button8.whileHeld(new run);
     // Turn to 90 degrees when the 'X' button is pressed, with a 5 second timeout
     new JoystickButton(m_driverController, Button.kCross.value)
         .whenPressed(new TurnToAngle(90, m_robotDrive).withTimeout(5));
-
     // Turn to -90 degrees with a profile when the Circle button is pressed, with a 5 second timeout
     new JoystickButton(m_driverController, Button.kCircle.value)
         .whenPressed(new TurnToAngleProfiled(-90, m_robotDrive).withTimeout(5));
+    */
   }
 
   /**
