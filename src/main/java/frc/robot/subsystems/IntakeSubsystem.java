@@ -9,7 +9,7 @@ public class IntakeSubsystem extends SubsystemBase
     {
 
     }
-    private final WPI_TalonSRX m_belt = new WPI_TalonSRX(DriveConstants.convayor);
+    private final WPI_TalonSRX m_intake = new WPI_TalonSRX(DriveConstants.convayor);
     public void intake(double speed)
     {
         m_intake.set(speed);

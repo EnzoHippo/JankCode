@@ -4,10 +4,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ShooterSubsystem extends SubsystemBase
+public class ShootSubsystem extends SubsystemBase
 {
     private final CANSparkMax m_shooter = new CANSparkMax(DriveConstants.shooterMotor, MotorType.kBrushless);
-    public ShooterSubsystem()
+    public ShootSubsystem()
     { 
 
     }

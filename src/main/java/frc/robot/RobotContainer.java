@@ -12,9 +12,9 @@ import frc.robot.Constants.OIConstants;
 // import frc.robot.commands.TurnToAngle;
 // import frc.robot.commands.TurnToAngleProfiled;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.BeltSubsytem;
-import frc.robot.subsystems.IntakeSubsytem;
+import frc.robot.subsystems.ShootSubsystem;
+import frc.robot.subsystems.BeltSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 //import edu.wpi.first.wpilibj2.command.PIDCommand;
@@ -30,9 +30,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  private final IntakeSubsytem m_intake = new IntakeSubsytem();
-  private final BeltSubsytem m_belt = new BeltSubsytem();
+  private final ShootSubsystem m_shooter = new ShootSubsystem();
+  private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final BeltSubsystem m_belt = new BeltSubsystem();
   // The driver's controller
   Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
   JoystickButton button1 = new JoystickButton(m_driverController, 1);
