@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootSubsystem extends SubsystemBase
 {
-    private final CANSparkMax m_shooter = new CANSparkMax(DriveConstants.shooterMotor, MotorType.kBrushless);
+    private final CANSparkMax m_shooter = new CANSparkMax(DriveConstants.shooterMoter, MotorType.kBrushless);
     public ShootSubsystem()
     { 
 
