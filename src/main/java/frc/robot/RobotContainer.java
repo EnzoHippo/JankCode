@@ -73,10 +73,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Drive at half speed when the right bumper is held
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, )
         .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
         .whenReleased(() -> m_robotDrive.setMaxOutput(1));
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, )
         .whileHeld(() -> m_shooter.shoot((m_driverController.getRawAxis(3))))
         .whenReleased(() -> m_shooter.shoot(0));;
     new JoystickButton(m_driverController, 2)
@@ -88,6 +88,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, 4)
         .whileHeld(() -> m_belt.belt(-.4))
         .whenReleased(() -> m_belt.belt(0));
+        button1.whenHeld(() m_shooter.intake(.5));
+        button2.whenHeld(() m_intake.intake(.5));
   
         // Stabilize robot to drive straight with gyro when left bumper is held
     /*new JoystickButton(m_driverController, Button.kL1.value)
